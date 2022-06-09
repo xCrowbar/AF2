@@ -15,29 +15,104 @@
 .myPrinters td, .myPrinters th{
     border: 1px solid #ddd;
     padding: 8px;
+    
 }
-
+.myPrinters tr{
+    border-radius: 10px;
+}
 
 .printerButton{
     margin-left: 100px;
     background-color:#3369ff;
-    padding:0.7em 1.7em;
+    padding:10px;
     font-family:'Roboto',sans-serif;
     color:#FFFFFF;
-    font-weight:400;
-    border-radius:5px;
+    font-weight:600;
+    border-radius:10px;
+    border: 0;
 }
 
 .printerButton:hover{
     box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
     background-color:#2979FF;
+    cursor: pointer;
 }
 
 .myPrinters th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #04AA6D;
+    background-color: #333;
     color: white;
   }
 
+.pInfo{
+    text-align: center;
+    font-weight: 700;
+    text-decoration: none;
+
+}
+
+
+.printers .color:hover{
+    background-color: rgb(130, 195, 255);
+    color: white;
+    cursor:pointer;
+    
+}
+
+.pInfo:active{
+    text-decoration: none;
+}
+
+
+.removeButton{
+    width:40%;
+
+}
+
+.remove{
+    background-color:#d54c4a;
+    padding: 10px;
+
+    font-family:'Roboto',sans-serif;
+    color:#FFFFFF;
+    font-weight:400;
+    border-radius:10px;
+    border:0px;
+    font-weight: 600;
+}
+
+
+
+.remove:hover{
+    background-color:#ff322e;
+    cursor: pointer;
+
+}
+
+.buttonArea{
+    margin: auto;
+    width:70%;
+    height: auto;
+}
+
+.AddprinterButton{
+    background-color:#476ed9;
+    padding:10px;
+    margin-top: 20px;
+    font-family:'Roboto',sans-serif;
+    color:#FFFFFF;
+    font-weight:600;
+    border-radius:10px;
+    border: 0;
+    position:relative;
+    float: right;
+}
+
+
+
+.AddprinterButton:hover{
+    background-color: #1b6efe;
+    cursor: pointer;
+}

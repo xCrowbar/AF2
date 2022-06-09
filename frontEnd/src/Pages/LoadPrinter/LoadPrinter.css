@@ -2,6 +2,7 @@
     border-radius: 5px;
     outline: none;
     border: 1px solid hsl(0, 0%, 80%);
+    width:500px;
 
 
 
@@ -17,16 +18,23 @@
     display: flex;
     justify-content: space-between;
 
+
 }
 
 .next1{
-    width: max-content;
-    padding:0.7em 1.7em;
+    width: 50px;
+    margin:auto;
     font-family:'Roboto',sans-serif;
-    background-color:#3369ff;
+    background-color:#dcd6d6;
     color:#FFFFFF;
-    font-weight:600;
-    border-radius:8px;
+    border:0px;
+    font-weight:bold;
+    border-radius:45%;
+}
+
+
+.next1 p{
+    color: white;
 }
 
 
@@ -34,11 +42,13 @@
     width: max-content;
     padding:0.7em 1.7em;
     font-family:'Roboto',sans-serif;
-    background-color:#3369ff;
+    background-color:#476ed9;
     color:#FFFFFF;
     font-weight:600;
     margin-left: 100px;
-    border-radius:8px;
+    border: 0px;
+    border-radius:10px;
+    
 }
 
 .SubmitButton{
@@ -48,7 +58,8 @@
 
 .next1:hover{
     box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
-    background-color:#2979FF;
+    background-color:#3369ff;
+    cursor: pointer;
 
 }
 
@@ -56,7 +67,8 @@
 
 .next2:hover{
     box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
-    background-color:#2979FF;
+    background-color:#1b6efe;
+    cursor: pointer;
 
 }
 
@@ -72,5 +84,6 @@
 
 input:focus {
     outline:2px solid rgb(23, 140, 243);
+
 }
 

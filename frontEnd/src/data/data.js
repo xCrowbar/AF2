@@ -47,6 +47,40 @@ let myPrinters={printers:[
 
 
 
+const material=[
+    {value:0 , label:"ABS"},
+    {value:1,label:"PLA"},
+    {value:2,label:"PETG"}];
+    
+const color=[0,"BLACK","WHITE","BROWN","GRAY","YELLOW",
+    "ORANGE","RED","PINK","PURPLE","BLUE","GREEN"];
+
+const selectColors=[
+    {value:1,label:"BLACK"},
+    {value:2,label:"WHITE"},
+    {value:3,label:"BROWN"},
+    {value:4,label:"GRAY"},
+    {value:5,label:"YELLOW"},
+    {value:6,label:"ORANGE"},
+    {value:7,label:"RED"},
+    {value:8,label:"PINK"},
+    {value:9,label:"PURPLE"},
+    {value:10,label:"BLUE"},
+    {value:11,label:"GREEN"}
+];
+const nozzles=[
+        {value:"1" , label:"1mm"},
+        {value:"2",label:"2mm"},
+        {value:"3",label:"3mm"},
+        {value:"4",label:"4mm"},
+        {value:"5",label:"5mm"},
+        {value:"6",label:"6mm"}]
+
+export function getNozzles(){
+            return nozzles;
+        }
+        
+
 export function getPrinters(){
     return myPrinters;
 }
@@ -63,4 +97,14 @@ export function getDesignes(){
 
 export function getDesigne(designe){
     return designes.find((val)=>val.name===designe);
+}
+
+
+export function getColor(){
+    return selectColors;
+
+}
+
+export function getConstMaterials(){
+    return material;
 }

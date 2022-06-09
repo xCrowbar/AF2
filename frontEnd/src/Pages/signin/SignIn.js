@@ -22,11 +22,13 @@ export default function SignIn(){
             </div>
             <label htmlFor="appt"><p>Inzio</p></label>
             <br/>
-            <input className="makerTimeInput" onChange={(event)=>setBegin(event.target.value)} type="time" id="appt" name="appt"min="09:00" max="18:00" required/>
+            <input className="makerTimeInput" onChange={(event)=>{onlyHour(event);
+                setBegin(()=>event.target.value)}} type="time" id="appt" name="appt"min="01:00" max="00:00" required/>
             <br/>
             <label htmlFor="appt"><p>Fine</p></label>
             <br/>
-            <input className="makerTimeInput" onChange={(event)=>setEnd(()=>event.target.value)} type="time" id="appt" name="appt"min="09:00" max="18:00" required/>
+            <input className="makerTimeInput" onChange={(event)=>{onlyHour(event);
+                setEnd(()=>event.target.value)}} type="time" id="appt" name="appt"min="01:00" max="00:00" required/>
         </div>
 
 
@@ -42,15 +44,19 @@ export default function SignIn(){
     const onlyHour= (e) => {
         let hour = e.target.value.split(':')[0]
         e.target.value = `${hour}:00`
+        return e;
       }
       
     const handleSubmit= async(event)=>{
         event.preventDefault();
-        navigator.geolocation.getCurrentPosition((position)=> {
+       /* navigator.geolocation.getCurrentPosition((position)=> {
             console.log("Latitude is :", position.coords.latitude);
             console.log("Longitude is :", position.coords.longitude);
             addCaller(position.coords.latitude,position.coords.longitude)
-        });
+        });*/
+        //For test
+        addCaller("1","2")
+
 
 
     }
@@ -86,8 +92,9 @@ export default function SignIn(){
         if (error)
             return;
         else{
-
-            if(await user.isUser()){
+            let isuser=await user.isUser();
+            console.log(isuser)
+            if(isuser===true){
                 SetErrorMessage("You are altready subscribed");
                 setError(true);
                 return;
@@ -96,7 +103,7 @@ export default function SignIn(){
             else{
 
                 let result=await user.addCaller(username,{latitude:latitude,longitude:longitude},begin,end);
-                if(result) 
+                if(result!=='Error') 
                     navigate('/',{replace:true});
                 
                 else { 
@@ -120,7 +127,7 @@ export default function SignIn(){
             <form  onSubmit={handleSubmit}>
                 <label>
                     <p>Username</p>
-                    <input type="text" name="username" onChange={event => setUsername(event.target.value)}autoComplete="off" required minLength="4" maxLength="10"></input>
+                    <input type="text" className="usernameField" style={{width:'200px'}}name="username" onChange={event => setUsername(event.target.value)}autoComplete="off" required minLength="4" maxLength="10"></input>
                 </label><br/>
 
                 <div className='checkboxes'>

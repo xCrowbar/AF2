@@ -34,7 +34,8 @@ export default function DesignInfo(){
 
     function importAll(r,stlFileName) {
         let designes = {};
-        r.keys().map((item, index) => { designes[item.replace('./', '')] = r(item); });       
+        r.keys().map((item, index) => { designes[item.replace('./', '')] = r(item);
+        return 1; });       
         for(const [key,value] of Object.entries(designes)){
             console.log(key)
             if(key===stlFileName)

@@ -7,6 +7,7 @@
     padding:15px;
     border: 2px solid rgb(180, 176, 176);
     border-radius: 10px;
+
 }
 
 
@@ -29,6 +30,7 @@
     margin-bottom: 10px;
     font-weight:600;
     border-radius:5px;
+    border:0px;
 }
 
 .loginButton:hover{

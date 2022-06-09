@@ -1,4 +1,4 @@
-.info{
+/*.info{
     margin: auto;
     border: 2px;
     text-align: center;
@@ -25,4 +25,104 @@
 
 .dataInfo{
     margin-top: 10px;
+}
+*/
+.title{
+    text-align: center;
+    margin-top: 90px;
+}
+
+.container{
+    margin: auto;
+    margin-top: 5px;
+    display: flex;
+    width:80%;
+    height: 500px;
+    border: 0.5px solid black;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+
+.navBarPrinter{
+    width: 350px;
+    text-align: center;
+    margin: auto;
+
+}
+
+.sectionStyle{
+    color: black;
+    display: inline-block;
+    padding: 10px;
+    padding-top:0px ;
+    font-weight:normal;
+    font-size:large;
+}
+
+.sectionStyle:hover{
+    text-decoration:underline;
+    cursor: pointer;
+}
+
+.Info{
+    margin:10px;
+    width:60%;
+    height: auto;
+    border-radius: 20px;
+    background-color: aliceblue;
+}
+
+
+
+.video {
+    margin: 20px;
+}
+
+.fieldInfo{
+    text-align: center;
+    margin-top: 40px;
+    
+
+}
+
+.fieldInfo p{
+    font-weight: 450;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(61, 60, 60);
+}
+
+.fieldInfo h3,.fieldInfo p{
+    display: inline;
+    margin:5px;
+}
+
+
+.fieldInfoAdd{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    
+    
+}
+
+.element{
+
+    margin: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.element input{
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid hsl(0, 0%, 80%);
+    height: 30px;
+
+}
+
+.fieldInfoAdd .next2{
+    margin-left: 450px;
+    margin-top: 20px;
+    
+
 }

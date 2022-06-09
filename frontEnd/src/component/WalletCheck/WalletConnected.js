@@ -2,28 +2,32 @@ import { useWeb3React } from '@web3-react/core'
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { useState,useEffect } from 'react';
 import {Navigate} from "react-router-dom";
-//import User from '../../SmartContracts/Users/Users';
+import User from '../../SmartContracts/Users/Users';
 
 export const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42, 56, 97 , 1337] });
 
  export default function WalletConnected({ children }){
   const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React();
   const [loaded, setLoaded] = useState(false);
-  //const user=new User();
-  //const [isUser,setIsUser]=useState(false)
   const [wait,setWait]=useState(false)
+  const [isuser,setIsUser]=useState(false)
 
-  /*const player=async()=>{
-    setIsUser(await user.isUser());
-    console.log(isUser);
-    return isUser;
-  }*/
-  
+
   const finish=()=>{
     setWait(true);
   }
 
   useEffect(() => {
+
+    const player=async()=>{
+      const user=new User();
+      await user.isUser()
+        .then((res)=>setIsUser(res));
+  
+    }
+
+    if(networkActive)
+      player();
     injected
       .isAuthorized()
       .then((isAuthorized) => {
@@ -36,13 +40,15 @@ export const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 
         setLoaded(true)
 
       });
-      setTimeout(()=>finish(),500);
+      setTimeout(()=>finish(),400);
     }, [activateNetwork, networkActive, networkError])
   
   
   if(loaded && wait){
-    if(networkActive===true  ){
-      return children;
+    if(networkActive===true){
+      if(isuser===true)
+        return children;
+      else return <Navigate to='/login'/>;
       }
     else if(!networkActive) {
       return <Navigate to='/login'/>

@@ -1,21 +1,32 @@
-import { UserNav } from "../../component/Navbar/homeNav"
-import { getPrinters } from "../../data/data"
-import './Myprinters.css'
-import { useNavigate } from "react-router-dom";
-import { useEffect} from "react";
-
+import { MakerNav } from "../../component/Navbar/homeNav"
+import './Myprinters.css';
+import Tables from "../../component/Tables/Tables";
 export default function MyPrinters(){
-
-    const printers=getPrinters();
-    const navigate=useNavigate();
-    useEffect(()=>{
-        },[])
-    
+       
     return(
         <div>
-             <UserNav/>
+             <MakerNav/>
             <div className="printerTable">
-            <h1>My printers</h1>
+            
+            
+           <Tables table='printer'/>
+ 
+
+            </div>
+            
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+/*
+
                 <table className="myPrinters">
                     <tbody>
                     <tr>
@@ -31,8 +42,8 @@ export default function MyPrinters(){
                     </tr>)}
                    </tbody> 
                 </table>
-            </div>
-            
-        </div>
-    )
-}
+
+
+
+
+*/

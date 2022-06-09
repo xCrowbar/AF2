@@ -14,7 +14,7 @@ abstract contract IUser{
 
 contract OnBoarding {
     //Printer
-    MaterialDetails private NONE = MaterialDetails("",MaterialType.ABS,MaterialColor.NONE,0,0,0,0);
+    MaterialDetails private NONE = MaterialDetails("",MaterialType.ABS,MaterialColor.NONE,0,0,0);
 
      //Printers
     mapping (address => mapping(address => Printer)) private printers;
@@ -81,7 +81,23 @@ contract OnBoarding {
         }
         return mprinters;
     }
-
+    
+    function getMakerPrinter(uint256 index)public view returns(Printer memory myPrinter){
+        require( Iuser.isPlayer(msg.sender) == true, "Player not in the system.");
+        require( Iuser.isMaker(msg.sender) == true, "Only Maker can get their Printers.");
+        myPrinter=printers[msg.sender][makerPrinters[msg.sender][index]];
+        return myPrinter;
+        
+    }
+    
+    function removePrinter(uint256 index)public payable{
+        require( Iuser.isPlayer(msg.sender) == true, "Player not in the system.");
+        require( Iuser.isMaker(msg.sender) == true, "Only Maker can get their Printers.");
+        makerPrinters[msg.sender][index]=makerPrinters[msg.sender][makerPrinters[msg.sender].length-1];
+        makerPrinters[msg.sender].pop();
+        
+    }
+    
     function getMakerNPrinters()
     public view
     returns(uint256 Nprinters){
@@ -103,12 +119,12 @@ contract OnBoarding {
         return response;
     }
 
-    function addMaterials(bytes32 name, MaterialType mType, MaterialColor mColor, uint256 quantityKG, uint256 quantityM, uint256 printTemp, uint256 bedTemp)
+    function addMaterials(bytes32 name, MaterialType mType, MaterialColor mColor, uint256 quantityKG, uint256 printTemp, uint256 bedTemp)
     public payable{
         require( Iuser.isMaker(msg.sender) == true, "Only Maker can add Material.");
         require(mColor != MaterialColor.NONE, "Color not valid");
         require(checkMaterial(name) == false, "There is already a material with this name");
-        MaterialDetails memory newMaterial = MaterialDetails(name, mType,mColor, quantityKG, quantityM, printTemp, bedTemp);    
+        MaterialDetails memory newMaterial = MaterialDetails(name, mType,mColor, quantityKG, printTemp, bedTemp);    
         materials[msg.sender][mType].push(newMaterial);
         materialsName[msg.sender].push(name);
     }
@@ -126,27 +142,55 @@ contract OnBoarding {
         }
         return av_materials;
     }
+    
+    
+    function getMaterial(bytes32 name)public view returns(MaterialDetails memory myMaterial){
+        require( Iuser.isMaker(msg.sender) == true, "Operation denied.");
+        require(checkMaterial(name) == true, "No material with this name");
+        for (uint i = 0; i < 3; i++){
+            for(uint j=0; j < materials[msg.sender][MaterialType(i)].length; j++){
+                if (materials[msg.sender][MaterialType(i)][j].name==name){
+                    return materials[msg.sender][MaterialType(i)][j];
+                }
+        }
+        
+    }
+    }
 
-    function updateMaterial(bytes32 name, MaterialType mType, MaterialColor mColor, uint256 quantityKG, uint256 quantityM, uint256 printTemp, uint256 bedTemp)
+    function updateMaterial(bytes32 name, MaterialType mType, MaterialColor mColor,uint256 quantityKG,uint256 printTemp,uint256 bedTemp)
     public payable{
         require( Iuser.isMaker(msg.sender) == true, "Only Maker can update Materials.");
         require(checkMaterial(name) == true, "No material with this name");
 
         for(uint j=0; j < materials[msg.sender][mType].length; j++){
             if (materials[msg.sender][mType][j].name==name){
-                materials[msg.sender][mType][j] = MaterialDetails(name,mType, mColor, quantityKG, quantityM, printTemp, bedTemp); 
+                materials[msg.sender][mType][j] = MaterialDetails(name,mType, mColor, quantityKG,printTemp, bedTemp); 
             }
         }
     }
 
-    function removeMaterial(bytes32 name, MaterialType mType) 
+function removeMaterial(bytes32 name, MaterialType mType) 
     public payable{
         require( Iuser.isMaker(msg.sender) == true, "Only Maker can delete Materials.");
         require(checkMaterial(name) == true, "No material with this name");
 
-        for(uint j=0; j < materials[msg.sender][mType].length; j++){
+        /*for(uint j=0; j < materials[msg.sender][mType].length; j++){
             if (materials[msg.sender][mType][j].name==name){
                 materials[msg.sender][mType][j] = NONE;
+            }
+        }*/
+                for(uint j=0; j < materials[msg.sender][mType].length; j++){
+            if (materials[msg.sender][mType][j].name==name){
+                    materials[msg.sender][mType][j]=materials[msg.sender][mType] [materials[msg.sender][mType].length-1];
+                    materials[msg.sender][mType].pop();
+            }
+        }
+        
+        for(uint256 i =0; i< materialsName[msg.sender].length;i++){
+            if(materialsName[msg.sender][i]== name){
+            materialsName[msg.sender][i]=materialsName[msg.sender][materialsName[msg.sender].length-1];
+            materialsName[msg.sender].pop();
+            break;
             }
         }
         for (uint i = 0; i < makerPrinters[msg.sender].length; i++) {
@@ -156,16 +200,22 @@ contract OnBoarding {
         }
     }
 
-    function mountMaterial(bytes32 name, MaterialType mType, address printer)
+    function mountMaterial(bytes32 name, MaterialType mType, uint256 printer)
     public payable{
         require(Iuser.isMaker(msg.sender) == true, "Only Maker can delete Materials.");
         require(checkMaterial(name) == true, "No material with this name");
         
         for(uint j=0; j < materials[msg.sender][mType].length; j++){
             if (materials[msg.sender][mType][j].name==name){
-                printers[msg.sender][printer].mountedMaterial = materials[msg.sender][mType][j];
+                printers[msg.sender][makerPrinters[msg.sender][printer]].mountedMaterial = materials[msg.sender][mType][j];
             }
         }
+    }
+    
+    
+    function getMterialsName()public view returns(bytes32 [] memory materials){
+    
+        return materialsName[msg.sender];
     }
 
 }

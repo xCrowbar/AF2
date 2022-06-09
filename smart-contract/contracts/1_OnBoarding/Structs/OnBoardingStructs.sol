@@ -30,7 +30,6 @@ pragma experimental ABIEncoderV2;
         MaterialType mType;
         MaterialColor color;
         uint256 quantityKG;
-        uint256 quantityM;//TODO Rimuovi kg o M
         uint256 printTemperature; 
         uint256 bedTemperature;
     }

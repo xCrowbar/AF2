@@ -22,7 +22,8 @@ export default function MetamaskLogin(props){
                   navigate('/',{replace:true});
               });*/
               let isUser=await user.isUser();
-              if(isUser ){
+              //console.log(isUser)
+              if(isUser!=='Error' && isUser===true ){
                 navigate("/",{replace:true})
               }
               else{
