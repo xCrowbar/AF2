@@ -26,9 +26,10 @@ export  function UserNav(){
                 <div className='logoa'>
                 
                 <Link className="prova" to="/"><img className='logo' alt="" src={logo}/></Link>
-                <Link className="section"to="/mydesignes" >My Design</Link>
-                <Link className='section' to="/myprinters">My printers</Link>
-                <Link className='section' to="/addprinter">Add printers</Link>
+                <Link className="section" to="/announce">Annouce Design</Link>
+                <Link className="section" to="/mydesignes" >My Design</Link>
+                <Link className="section" to="/myprinters">My printers</Link>
+                <Link className="section" to="/addprinter">Add printers</Link>
 
                 
                 </div>

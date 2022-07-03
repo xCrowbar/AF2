@@ -1,135 +1,79 @@
-import React, { useEffect,useState,Component } from 'react';
-//import Header from './shared/components/Header';
-import '../static/style/App.css'
-import "core-js/stable";
-import "regenerator-runtime/runtime";
-import Web3 from 'web3';
-import nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Nav from 'react-bootstrap/Nav';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-//IMPORT CONTRACTS
+//import User from './SmartContracts/Users/Users';
+//import { ethers } from "ethers";
+import './App.css';
+import Homepage from './Pages/Homepage/Homepage';
+import {BrowserRouter,Route,Routes} from "react-router-dom";
+import Announce from './Pages/Announce/Announce';
+import MyDesignes from './Pages/Mydesignes/mydesignes';
+import DesignInfo from './Pages/myDesigneInfo/DesignInfo';
+import MyPrinters from './Pages/Myprinters/MyPrinters';
+import MetamaskLogin from './Pages/metamaskLogin/metamaskLogin';
+import PrinterDetails from './Pages/Myprinters/PrinterDetails/PrinterDetails'
+import SignIn from './Pages/signin/SignIn';
+import WalletConnected from './component/WalletCheck/WalletConnected';
+import LoadPrinter from './Pages/LoadPrinter/LoadPrinter';
 
-//IMPORT PAGES
-import Home from '../pages/public/Home'
-//IMPORT NAVBAR
-import Layout from '../components/Layout/Layout'
-//IMPORT AUTH COMPONENT
-import Signup from '../pages/public/Signup';
-//IMPORT PRINTER PAGES
-import AddPrinter from '../pages/private/Printers/AddPrinter';
-import MyPrinters from '../pages/private/Printers/MyPrinters';
-// IMPORT DESIGN PAGES
-import Announce from '../pages/private/Design/Announce';
-import MyDesign from '../pages/private/Design/MyDesign';
-import MyVotes from '../pages/private/Design/MyVotes';
-import VoteDesign from '../pages/private/Design/VoteDesign';
-//IMPORT ORDERS PAGES
-import NewOrder from '../pages/private/Orders/NewOrder';
-import MyOrder from '../pages/private/Orders/MyOrder';
+/*export const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42, 56, 97,1337] });
 
-import BuyToken from '../pages/private/Token/BuyToken';
+ export function WalletConnected(){
+  const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React()
+  const [loaded, setLoaded] = useState(false)
+  
+  useEffect(() => {
+    injected
+      .isAuthorized()
+      .then((isAuthorized) => {
+        setLoaded(true)
+        if (isAuthorized && !networkActive && !networkError) {
+          activateNetwork(injected)
+        }
+      })
+      .catch(() => {
+        setLoaded(true)
+      })
+  }, [activateNetwork, networkActive, networkError])
 
-//IMPORT MAPS FOR TESTS DELETE AFTER COMPLETE
-import Maps from '../components/APIs/Maps/Maps';
+  if(loaded && networkActive)
+    return <Outlet></Outlet>
+  else if(loaded && !networkActive)
+    return <Navigate to="login"></Navigate>
+  else 
+    return <span>Loading</span>
 
-//IMPORT PAGE MODIFY MATERIALS
+
+}*/
 
 
 
-function App(){
 
-const isUser= ()=>{
-    return true
+
+function App() {
+
+  return(
+
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage/>}></Route>
+        <Route path="/login" element={<MetamaskLogin/>}></Route>
+        <Route path="/signin" element={<SignIn/>}></Route>
+        <Route path="announce"element={<WalletConnected><Announce/></WalletConnected>}/>      
+        <Route path="myprinters"element={<WalletConnected><MyPrinters/></WalletConnected>}/>
+        <Route path='myprinters/:printerDetails' element={<WalletConnected><PrinterDetails/></WalletConnected>}/>
+        <Route path="mydesignes" element={<WalletConnected><MyDesignes/></WalletConnected>}/>
+        <Route path="mydesignes/:designInfo" element={<WalletConnected><DesignInfo/></WalletConnected>}/>
+        <Route path="addprinter" element={<WalletConnected><LoadPrinter/></WalletConnected>}/>
+      </Routes>
+    </BrowserRouter>
+
+  )
 }
 
-const isMaker= () =>{
-    return true
-}
-
-useEffect(() => {
-    if (!isUser()){
-        //redirect to home
-    }
-    loadWeb3();
-    loadBlockchaindata();
-},[])
-
-const [currentaccount,setCurrentaccount] = useState("");
-const[loader,setloader]= useState(true);
-const[design,Setdesign] = useState();
-
-const loadWeb3 = async() => {
-    if(window.ethereum){
-        window.web3=new Web3(window.ethereum)
-        await window.ethereum.enable()
-    }
-    else if(window.web3){
-    window.web3=new Web3(window.web3.currentProvider)
-    }
-    else{
-    window.alert('Scarica Metamask')
-    }
-}
-//INTERACT WITH BLOCKCHAIN
-const loadBlockchaindata = async ()=>{
-    setloader(true); //così fino a quando non verifico che il wallet metamask è ok resto in loading
-    const web3 = window.web3;
-    const accounts = await web3.eth.getAccounts();
-    const account = accounts[0];
-    setCurrentaccount(account);
-    const networkId = await web3.eth.net.getId();
-
-    /*const networkData = designVoting.networks[networkId]; //se non è presente il contract non è deployato
-    if(networkData){
-        //const design = new web3.eth.Contract(designVoting.abi,networkData.address);// dal file migration.json
-        /*interaction test
-        const players1 = await design.methods.players(1).call();
-        const player2 = await design.methods.players(1).call();
-        console.log(players1);
-        console.log(players2);
-        Setdesign(design);
-        
-       setloader(false); // se tutto è andato a buon fine con il wallet metamask appo vado avanti
-    }else{
-        window.alert('the smart contract is not deployed')
-    }
-    */
-   setloader(false);
-    return (account);
-}
-
-if(loader){
-    return <div>loading... You must need to install Metamask</div>
-}
-
-
-return(
-    <div> 
-<div>
-          <BrowserRouter>
-              <Routes>
-                  <Route path="/" element ={<Layout account={currentaccount}/>}>
-                  <Route index element={<Home />}/>
-                  <Route path="AddPrinter" element={<AddPrinter />}/>
-                  <Route path="Signup" element={<Signup account={currentaccount}/>}/>
-                  <Route path="VoteDesign" element={<VoteDesign />}/>
-                  <Route path="MyPrinters" element={<MyPrinters />}/>
-                  <Route path="MyOrder" element={<MyOrder />}/>
-                  <Route path="Announce" element={<Announce />}/>
-                  <Route path="MyVotes" element={<MyVotes />}/>
-                  <Route path="AddPrinter" element={<AddPrinter />}/>
-                  <Route path="BuyToken" element={<BuyToken />}/>
-                  <Route path="MyDesign" element={<MyDesign />}/>
-                  <Route path="NewOrder" element={<NewOrder />}/>
-                  <Route path="Maps" element={<Maps />}/>
-                  </Route>
-              </Routes>
-          </BrowserRouter>
-
-</div>
-</div>
-    );
-
-}
 export default App;
+
+
+
+
+
+
+
+
