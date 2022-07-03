@@ -72,7 +72,6 @@ class UploadSTL extends Component {
       return;
     }
     else return file.path;
-    //Test Branch
   }
 
 	render() {
