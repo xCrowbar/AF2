@@ -1,0 +1,77 @@
+.background {
+    background-color: darkgrey;
+    display: flex;
+}
+
+.rendererCanvas {
+    background-color: lightgray;
+    flex: 30%;
+}
+
+.rendererButtons {
+    background-color: lightgray;
+    flex: 50%;
+}
+
+.announceDiv {
+    background-color: darkgray;
+    width: 50%;
+}
+
+.announceFile {
+    background-color: white;
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border-width: 5px;
+    border-color: blue;
+    margin: 10px 10px;
+    width: 71%;
+    float: center;
+}
+
+.announceParam {
+    background-color: white;
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border-width: 5px;
+    border-color: blue;
+    margin: 10px 10px;
+    width: 69.5%;
+    float: center;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type = number] {
+    -moz-appearance: textfield;
+}
+
+.announceButton {
+    background-color: white;
+    transition-duration: 0.3s;
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border-width: 5px;
+    border-color: blue;
+    margin: 10px 10px;
+    width: 80%;
+    float: center;
+}
+
+.announceButton:hover {
+    background-color: lightgray;
+}
+
+.screenshotDiv {
+    background-color: lightgray;
+    margin: 10px 15px;
+    width: 36%;
+    height: 600px;
+    float: right;
+}

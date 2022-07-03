@@ -1,0 +1,97 @@
+.SignIn{
+    margin:auto;
+    width: 25%;
+    min-width:250px;
+    height: auto;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid rgb(180, 176, 176);
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+
+.SignIn p{
+    font-weight: 600;
+    color: rgb(4, 17, 29);
+    position: relative;
+}
+
+.SignIn input{
+
+    width: 90%;
+    height:30px;
+    max-width: fit-content;
+
+}
+
+.SubmitButton{
+    margin: 20px;
+    width: max-content;
+    padding:0.7em 1.7em;
+    font-family:'Roboto',sans-serif;
+    background-color:#3369ff;
+    color:#FFFFFF;
+    font-weight:600;
+    border-radius:8px;
+
+}
+
+.SubmitButton:hover{
+    box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+    background-color:#2979FF;
+
+}
+
+p.error{
+    color:rgb(193, 9, 9);
+    font-size:12px;
+    font-weight: 450;
+}
+
+.sign{
+    margin-top: 100px;
+}
+.sign h2{
+    text-align: center;
+}
+.makerTimeInput{
+    padding-left:20px;
+    padding-right:20px ;
+}
+
+
+.checkboxes label {
+    display: inline-block;
+    padding-right: 10px;
+    white-space: nowrap;
+
+  }
+
+.checkboxes input {
+    vertical-align: middle;
+
+    
+  }
+
+.checkboxes label span {
+    vertical-align: middle;
+  }
+
+.info{
+    text-decoration: none;
+    border: none;
+    font-size:small;
+    margin: auto;
+    text-align: center;
+    
+}
+
+.info p{
+    font-size: small;
+    font-weight: 350;
+}
+
+.check:focus {
+    outline:2px solid rgb(255, 255, 255);
+}

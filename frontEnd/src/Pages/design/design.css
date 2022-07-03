@@ -1,0 +1,53 @@
+.designesList{
+    margin-top: 110px;
+}
+
+.flexDesignes{
+    display:flex;
+    flex-wrap: wrap;
+    margin:30px;
+    margin-top: 60px;
+    height:auto;
+    min-height: 300px;
+    background-color: white;
+    border-radius: 5px;
+}
+h1{
+    text-align: center;
+}
+
+.flexDesignes > div {
+    background-color: #fdf7f7;
+    margin: 25px;
+    margin-top: 50px;
+    font-size: 30px;
+  }
+
+.cube{
+    width:220px;
+    height: 200px;
+    margin:10px;
+    border-radius: 5px;
+}
+
+.designModel{
+    background-color: whitesmoke;
+    border:2px solid gray;
+    max-width:400px;
+    width: 100%;
+    height:100%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+
+.designModel h3{
+    font-family:'Courier New';
+    color: rgb(32, 129, 226);
+}
+
+.designModel p{
+    font-size: medium;
+    margin: 10px;
+}
+
