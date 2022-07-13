@@ -15,15 +15,15 @@ class UploadSTL extends Component {
   
 	onChange(event) {
     if(event.target.files[0] === undefined) return;
-    let reader = new FileReader();
-    reader.readAsArrayBuffer(event.target.files[0]);
-    reader.onload = () => {
-      this.setState({file : reader.result}); console.log(event.target.files[0])
+    let readerFile = new FileReader();
+    readerFile.readAsArrayBuffer(event.target.files[0]);
+    readerFile.onload = () => {
+      this.setState({file : reader.result});
     }
-    let reader2 = new FileReader();
-    reader2.readAsDataURL(event.target.files[0]);
-    reader2.onload = () => {
-      this.changeFile(reader2.result);
+    let readerPhoto = new FileReader();
+    readerPhoto.readAsDataURL(event.target.files[0]);
+    readerPhoto.onload = () => {
+      this.changeFile(readerPhoto.result);
     }
   }
 
@@ -52,21 +52,16 @@ class UploadSTL extends Component {
   }
 
   async downloadDesign(event) {
-    if(file == null) {
-      alert('Devi prima caricare il tuo file!');
-      return;
-    }
-    var nomefile = 'prova.stl';
+    var nomefile = 'downloadedFile.stl';
     var link = document.createElement('a');
-    link.download = 'test';
+    link.download = 'downloadLink';
     link.href = 'https://ipfs.infura.io/ipfs/' + file.path + '?filename=' + nomefile;
-
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }
 
-  async returnHash(event) {
+  async returnHash(event) { // Da utilizzare per sviluppo esterno
     if(file == null) {
       alert('Devi prima caricare il tuo file!');
       return;
@@ -80,9 +75,12 @@ class UploadSTL extends Component {
         {/*<img class="screenshotDiv" src={this.state.photo}/>*/}
         <div class="announceDiv">
           <input class="announceFile" type="file" onChange={(event) => this.onChange(event)}/>
-          <input class="announceParam" type="number" placeholder="Component" onWheel={(event) => event.target.blur()} onChange={(event) => this.setState({Component: event.target.value})}/>
-          <input class="announceParam" type="number" placeholder="Taur" onWheel={(event) => event.target.blur()} onChange={(event) => this.setState({Taur: event.target.value})}/>
-          <input class="announceParam" type="number" placeholder="Taup" onWheel={(event) => event.target.blur()} onChange={(event) => this.setState({Taup: event.target.value})}/>
+          <input class="announceParam" type="number" placeholder="Component"
+            onWheel={(event) => event.target.blur()} onChange={(event) => this.setState({Component: event.target.value})}/>
+          <input class="announceParam" type="number" placeholder="Taur"
+            onWheel={(event) => event.target.blur()} onChange={(event) => this.setState({Taur: event.target.value})}/>
+          <input class="announceParam" type="number" placeholder="Taup"
+            onWheel={(event) => event.target.blur()} onChange={(event) => this.setState({Taup: event.target.value})}/>
           <button class="announceButton" onClick={(event) => this.getFrame(event)}>Take a snap!</button>
           <button class="announceButton" onClick={(event) => this.submitForm(event)}>Announce Design</button>
           <button class="announceButton" onClick={(event) => this.downloadDesign(event)}>Download your Design</button>
